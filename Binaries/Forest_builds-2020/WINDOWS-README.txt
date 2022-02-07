@@ -1,0 +1,1 @@
+Simply double click .exe file and run the binary.

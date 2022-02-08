@@ -49,6 +49,7 @@ public class Networking : MonoBehaviour
 		if (instance != null)
 			throw new UnityException ("Duplicate allocation of singleton class!");
 		instance = this;
+		        Debug.Log("");
 	}
 	
 	void Start()

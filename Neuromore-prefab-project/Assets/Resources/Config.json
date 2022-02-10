@@ -1,0 +1,10 @@
+{
+    "clientType": 1,
+    "name": "Infinite Tunnel",
+    "stages": 
+    [
+        {
+            "name": "Example Session"
+        }
+	]
+}

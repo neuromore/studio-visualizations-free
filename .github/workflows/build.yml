@@ -1,0 +1,51 @@
+name: Build
+on:
+  workflow_dispatch:
+  workflow_call:
+  push:
+    branches:
+      - 'master'
+      - 'release'
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 480
+    env:
+      BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-22.04]
+        targetPlatform: [StandaloneWindows64, StandaloneWindows, StandaloneLinux64, StandaloneOSX]
+    steps:
+    
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+        lfs: true
+    
+    - name: Cache
+      uses: actions/cache@v3
+      with:
+          path: ./ForestScene/Library
+          key: ForestScene-Library-${{ matrix.targetPlatform }}
+          restore-keys: ForestScene-Library-
+    
+    - name: Build
+      uses: game-ci/unity-builder@v2
+      env:
+        UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+        UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
+      with:
+        targetPlatform: ${{ matrix.targetPlatform }}      
+        projectPath: ./ForestScene
+        buildsPath: ./ForestScene/Build
+        buildName: ForestScene
+
+    - name: Upload
+      uses: actions/upload-artifact@v3
+      with:
+        name: ForestScene-${{ matrix.targetPlatform }}
+        path: ./ForestScene/Build/${{ matrix.targetPlatform }}

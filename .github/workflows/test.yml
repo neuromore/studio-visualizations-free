@@ -15,9 +15,34 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-2022]
+        os: [ubuntu-22.04]
+        targetPlatform: [StandaloneWindows64,StandaloneWindows,StandaloneLinux64,StandaloneOSX]
     steps:
     
     # Checkout
     - name: Checkout
       uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+        lfs: true
+    
+#    - uses: actions/cache@v2
+#      with:
+#          path: Library
+#          key: Library-${{ matrix.targetPlatform }}
+#          restore-keys: Library-
+    
+    - uses: game-ci/unity-builder@v2
+      env:
+        UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+        UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
+      with:
+        targetPlatform: ${{ matrix.targetPlatform }}      
+        projectPath: ./ForestScene
+        buildName: ForestScene
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: Build-${{ matrix.targetPlatform }}
+        path: build/${{ matrix.targetPlatform }}

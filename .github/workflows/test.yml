@@ -41,10 +41,11 @@ jobs:
       with:
         targetPlatform: ${{ matrix.targetPlatform }}      
         projectPath: ./ForestScene
+        buildsPath: ./ForestScene/Build
         buildName: ForestScene
 
     - name: Upload
       uses: actions/upload-artifact@v3
       with:
-        name: Build-${{ matrix.targetPlatform }}
-        path: build/${{ matrix.targetPlatform }}
+        name: ForestScene-${{ matrix.targetPlatform }}
+        path: ./ForestScene/Build/${{ matrix.targetPlatform }}

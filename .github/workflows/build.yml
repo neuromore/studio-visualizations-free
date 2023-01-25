@@ -16,15 +16,13 @@ jobs:
       fail-fast: false
       matrix:
         visualization: [ForestScene]
-        os: [ubuntu-22.04, windows-2022, macos-12]
-        targetPlatform: [StandaloneWindows64, StandaloneWindows, StandaloneLinux64, StandaloneOSX, WSAPlayer]
-        exclude:
+        include:
           - os: ubuntu-22.04
-            targetPlatform: WSAPlayer
-          - os: windows-2022
-            targetPlatform: [StandaloneLinux64, StandaloneOSX]
+            targetPlatform: StandaloneLinux64
+          - os: windows-2019
+            targetPlatform: [StandaloneWindows64, StandaloneWindows, WSAPlayer]
           - os: macos-12
-            targetPlatform: WSAPlayer
+            targetPlatform: StandaloneOSX
 
     steps:
 

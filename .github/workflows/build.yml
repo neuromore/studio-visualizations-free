@@ -22,9 +22,12 @@ jobs:
           - os: ubuntu-22.04
             targetPlatform: WSAPlayer
           - os: windows-2022
-            targetPlatform: StandaloneLinux64
+            targetPlatform: [StandaloneLinux64, StandaloneOSX]
+          - os: macos-12
+            targetPlatform: WSAPlayer
+
     steps:
-    
+
     - name: Checkout
       uses: actions/checkout@v3
       with:
@@ -35,8 +38,8 @@ jobs:
       uses: actions/cache@v3
       with:
           path: ./${{ matrix.visualization }}/Library
-          key: ${{ matrix.visualization }}-Library-${{ matrix.targetPlatform }}
-          restore-keys: ${{ matrix.visualization }}-Library-
+          key: ${{ matrix.visualization }}-${{ matrix.os }}-Library-${{ matrix.targetPlatform }}
+          restore-keys: ${{ matrix.visualization }}-${{ matrix.os }}-Library-
     
     - name: Build
       uses: game-ci/unity-builder@v2
@@ -53,5 +56,6 @@ jobs:
     - name: Upload
       uses: actions/upload-artifact@v3
       with:
-        name: ${{ matrix.visualization }}-${{ matrix.targetPlatform }}
+        name: ${{ matrix.visualization }}-${{ matrix.os }}-${{ matrix.targetPlatform }}
         path: ./${{ matrix.visualization }}/Build/${{ matrix.targetPlatform }}
+

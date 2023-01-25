@@ -15,13 +15,15 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        visualization: [ForestScene]
         include:
-          - os: ubuntu-22.04
+          - visualization: ForestScene
+            os: ubuntu-22.04
             targetPlatform: StandaloneLinux64
-          - os: windows-2019
-            targetPlatform: StandaloneWindows64
-          - os: macos-12
+          - visualization: ForestScene
+            os: windows-2019
+            targetPlatform: [StandaloneWindows64, StandaloneWindows, WSAPlayer]
+          - visualization: ForestScene
+            os: macos-12
             targetPlatform: StandaloneOSX
 
     steps:

@@ -16,6 +16,8 @@ jobs:
       fail-fast: false
       matrix:
         visualization: [ForestScene]
+        os: []
+        targetPlatform: []
         include:
           - os: ubuntu-22.04
             targetPlatform: StandaloneLinux64

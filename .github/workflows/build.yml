@@ -21,7 +21,7 @@ jobs:
             targetPlatform: StandaloneLinux64
           - visualization: ForestScene
             os: windows-2019
-            targetPlatform: [StandaloneWindows64, StandaloneWindows, WSAPlayer]
+            targetPlatform: WSAPlayer
           - visualization: ForestScene
             os: macos-12
             targetPlatform: StandaloneOSX

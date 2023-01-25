@@ -15,8 +15,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-22.04]
-        targetPlatform: [StandaloneWindows64, StandaloneWindows, StandaloneLinux64, StandaloneOSX]
+        os: [ubuntu-22.04, windows-2022]
+        visualization: [ForestScene]
+        targetPlatform: [StandaloneWindows64, StandaloneWindows, StandaloneLinux64, WSAPlayer]
+        exclude:
+          - os: ubuntu-22.04
+            targetPlatform: WSAPlayer
     steps:
     
     - name: Checkout
@@ -28,9 +32,9 @@ jobs:
     - name: Cache
       uses: actions/cache@v3
       with:
-          path: ./ForestScene/Library
-          key: ForestScene-Library-${{ matrix.targetPlatform }}
-          restore-keys: ForestScene-Library-
+          path: ./${{ matrix.visualization }}/Library
+          key: ${{ matrix.visualization }}-Library-${{ matrix.targetPlatform }}
+          restore-keys: ${{ matrix.visualization }}-Library-
     
     - name: Build
       uses: game-ci/unity-builder@v2
@@ -40,12 +44,12 @@ jobs:
         UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
       with:
         targetPlatform: ${{ matrix.targetPlatform }}      
-        projectPath: ./ForestScene
-        buildsPath: ./ForestScene/Build
-        buildName: ForestScene
+        projectPath: ./${{ matrix.visualization }}
+        buildsPath: ./${{ matrix.visualization }}/Build
+        buildName: ${{ matrix.visualization }}
 
     - name: Upload
       uses: actions/upload-artifact@v3
       with:
-        name: ForestScene-${{ matrix.targetPlatform }}
-        path: ./ForestScene/Build/${{ matrix.targetPlatform }}
+        name: ${{ matrix.visualization }}-${{ matrix.targetPlatform }}
+        path: ./${{ matrix.visualization }}/Build/${{ matrix.targetPlatform }}

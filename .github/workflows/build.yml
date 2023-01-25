@@ -15,12 +15,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-22.04, windows-2022]
         visualization: [ForestScene]
-        targetPlatform: [StandaloneWindows64, StandaloneWindows, StandaloneLinux64, WSAPlayer]
+        os: [ubuntu-22.04, windows-2022, macos-12]
+        targetPlatform: [StandaloneWindows64, StandaloneWindows, StandaloneLinux64, StandaloneOSX, WSAPlayer]
         exclude:
           - os: ubuntu-22.04
             targetPlatform: WSAPlayer
+          - os: windows-2022
+            targetPlatform: StandaloneLinux64
     steps:
     
     - name: Checkout

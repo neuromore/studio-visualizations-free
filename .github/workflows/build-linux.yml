@@ -1,4 +1,4 @@
-name: Build
+name: Build Linux
 on:
   workflow_dispatch:
   workflow_call:
@@ -15,19 +15,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - visualization: ForestScene
-            os: ubuntu-22.04
-            targetPlatform: StandaloneLinux64
-          - visualization: ForestScene
-            os: windows-2019
-            targetPlatform: WSAPlayer
-          - visualization: ForestScene
-            os: macos-12
-            targetPlatform: StandaloneOSX
-
+        visualization: [ForestScene]
+        os: [ubuntu-22.04]
+        targetPlatform: [StandaloneLinux64]
     steps:
-
+    
     - name: Checkout
       uses: actions/checkout@v3
       with:
@@ -58,4 +50,3 @@ jobs:
       with:
         name: ${{ matrix.visualization }}-${{ matrix.os }}-${{ matrix.targetPlatform }}
         path: ./${{ matrix.visualization }}/Build/${{ matrix.targetPlatform }}
-

@@ -34,6 +34,7 @@ jobs:
           restore-keys: ${{ matrix.visualization }}-${{ matrix.os }}-Library-
 
     - name: Test
+      shell: cmd
       run: |
         cd ForestScene
         dir /s
@@ -51,6 +52,7 @@ jobs:
         buildName: ${{ matrix.visualization }}
 
     - name: Test
+      shell: cmd
       run: |
         cd ForestScene
         cd Build

@@ -33,12 +33,6 @@ jobs:
           key: ${{ matrix.visualization }}-${{ matrix.os }}-Library-${{ matrix.targetPlatform }}
           restore-keys: ${{ matrix.visualization }}-${{ matrix.os }}-Library-
 
-    - name: Test
-      shell: cmd
-      run: |
-        cd ForestScene
-        dir /s
-    
     - name: Build
       uses: game-ci/unity-builder@v2
       env:
@@ -50,14 +44,7 @@ jobs:
         projectPath: ./${{ matrix.visualization }}
         buildsPath: ./${{ matrix.visualization }}/Build
         buildName: ${{ matrix.visualization }}
-
-    - name: Test
-      shell: cmd
-      run: |
-        cd ForestScene
-        cd Build
-        dir /s
-            
+  
     - name: Upload
       uses: actions/upload-artifact@v3
       with:

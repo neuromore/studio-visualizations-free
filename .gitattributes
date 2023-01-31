@@ -1,5 +1,10 @@
 ## Unity ##
 
+#Binary .asset
+/visualizations/**/Mountains[[:space:]]at[[:space:]]last.asset filter=lfs diff=lfs merge=lfs -text
+/visualizations/**/New[[:space:]]Terrain.asset                 filter=lfs diff=lfs merge=lfs -text
+/visualizations/**/SecondaryTerrain.asset                      filter=lfs diff=lfs merge=lfs -text
+
 *.cs diff=csharp text
 *.cginc text
 *.shader text
@@ -15,11 +20,6 @@
 *.controller merge=unityyamlmerge eol=lf
 
 ## git-lfs by extension ##
-
-#Binary .asset
-/visualizations/**/Mountains[[:space:]]at[[:space:]]last.asset filter=lfs diff=lfs merge=lfs -text
-/visualizations/**/New[[:space:]]Terrain.asset                 filter=lfs diff=lfs merge=lfs -text
-/visualizations/**/SecondaryTerrain.asset                      filter=lfs diff=lfs merge=lfs -text
 
 #Image
 *.psd filter=lfs diff=lfs merge=lfs -text
